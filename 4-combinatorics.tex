@@ -1,0 +1,125 @@
+\section{Combinatorics}
+\subsection{Counting and Probability}
+\begin{problem}
+    How many subsets of \(\brce{1, 2, 3, \ldots, n}\) are there? How many of those have even size?
+\end{problem}
+
+\begin{solution}
+    There are \(2^n\) subsets of \(\brce{1, 2, 3, \ldots, n}\) of this, and this is simply by observing that there are two choices for each element, either it is in the subset or not. Alternatively,
+    \[
+        \binom{n}{0} + \binom{n}{1} + \cdots + \binom{n}{n} = \para{1 + 1}^{n} = 2^n.
+    \]
+
+    There are \(2^{n - 1}\) of those which have even size. This is because when you decide whether the first \(\para{n - 1}\) elements are in the subset, whether \(n\) is in the subset is determined for the size of the subset to be even. Alternatively,
+    \[
+        \binom{n}{0} + \binom{n}{2} + \cdots + \binom{n}{2\floor{\frac{n}{2}}} = \frac{1}{2} \brac{\para{1 + 1}^{n} + \para{1 - 1}^{n}} = \frac{1}{2} \cdot 2^n = 2^{n - 1}.
+    \]
+
+\end{solution}
+
+\begin{problem}
+    Let \(p\para{n}\) be the number of partitions of \(\brce{1, 2, \ldots, n}\). What is \(p\para{3}\)?
+    
+    Show that
+    \[
+        2^{n - 1} \leq p\para{n} \leq 2^{\frac{n \para{n - 1}}{2}}.
+    \]
+
+    Improve the upper bound to
+    \[
+        p\para{n} \leq n!.
+    \]
+\end{problem}
+
+\begin{solution}
+    For \(\brce{1, 2, 3}\), the partitions are
+    \begin{itemize}
+        \item \(\brce{1, 2, 3}\);
+        \item \(\brce{1, 2}, \brce{3}\); \(\brce{1, 3}, \brce{2}\); \(\brce{2, 3}, \brce{1}\);
+        \item \(\brce{1}, \brce{2}, \brce{3}\).
+    \end{itemize}
+
+    Hence, \(p\para{3} = 7\).
+
+    For the lower bound, we see that each element \(m = 2, 3, \ldots, n\) has at least two choices, to belong in the same partition as \(1\), or to not. In other words, we choose a subset \(P \subseteq \brce{2, 3, \ldots, n}\), and the partition \(\brce{1} \cup P, \brce{2, 3, \ldots, n} \setminus P\) is a partition. This gives a lower bound of \(2^{n - 1}\).
+
+    For the upper bound, we see that for each partition, this gives a unique indication on whether two elements are in the same set in the partition or not. There are \(\binom{n}{2} = \frac{n \para{n - 1}}{2}\) such pairs, so there are at most \(2^{\frac{n \para{n - 1}}{2}}\) partitions.
+
+    To get the better upper bound, we construct a partition by putting in elements one by one. For \(1\), there is only one choice, to be in the first set. For \(2\), it could choose to go in the same set as \(1\), or to go into a new set on its own, giving \(2\) choices. Similarly, for \(k\), it could go into the same set as \(1\), or \(2\), \dots, or \(\para{k - 1}\), or on its own (although some choices are equivalent). This gives an upper bound of \(n!\).
+\end{solution}
+
+\begin{problem}
+    Prove that
+    \[
+    \binom{n}{0}^2 + \binom{n}{1}^2 + \cdots + \binom{n}{n}^2 = \binom{2n}{n}.\]
+
+    Show that
+    \[
+        \binom{n}{m} + \binom{n}{m + 1} = \binom{n + 1}{m + 1},
+    \]
+    and hence or otherwise, show that
+    \[
+        \binom{k}{k} + \binom{k + 1}{k} + \cdots + \binom{n}{k} = \binom{n + 1}{k + 1}.
+    \]
+\end{problem}
+
+\begin{solution}
+    For the first identity, we notice that on one hand, the coefficient in \(\para{1 + x}^n \para{1 + x}^n = \para{1 + x}^{2n}\) is simply \(\binom{2n}{n}\).
+    
+    On the other hand, if we take the term \(x^k\) in the first \(\para{1 + x}^n\), the coefficient is \(\binom{n}{k}\), and we take the term \(x^{n - k}\) in the second \(\para{1 + x}^n\), the coefficient is \(\binom{n}{n - k} = \binom{n}{k}\) as well.
+    
+    Summing the product of those two over \(k = 0\) to \(k = n\) gives the identity as desired.
+
+    Alternatively, we could think these as choosing \(n\) elements out of the set \(\brce{1, 2, \ldots, 2n}\), and we take \(k\) out of \(\brce{1, 2, \ldots, n}\) and \(\para{n - k}\) out of \(\brce{n + 1, n + 2, \ldots, 2n}\).
+
+    Pascal's Identity can be considered by considering the coefficient of \(x^{m + 1}\) in \(\para{1 + x} \para{1 + x}^{n} = \para{1 + x}^{n + 1}\) as \(\binom{n + 1}{m + 1}\).
+
+    On the other hand,
+    \[
+        \para{1 + x} \para{1 + x}^{n} = \para{1 + x}^{n} + x \para{1 + x}^{n},
+    \]
+    and the coefficient of \(x^{m + 1}\) in this is
+    \[
+        \binom{n}{m + 1} + \binom{n}{m}.
+    \]
+
+    This gives the identity as desired.
+
+    Alternatively, we choose \(\para{m + 1}\) elements out of the set \(\brce{1, 2, \ldots, n + 1}\). If we choose \(\para{n + 1}\), then we have \(\binom{n}{m}\) ways to choose the remaining \(m\) from \(\brce{1, 2, \ldots, n}\). If not, we need to choose \(\para{m + 1}\) from \(\brce{1, 2, \ldots, n}\).
+
+    Using telescoping, we notice
+    \[
+        \binom{m}{k} = \binom{m + 1}{k + 1} - \binom{m}{k + 1},
+    \]
+    and hence
+    \begin{align*}
+        \sum_{m = k}^{n} \binom{m}{k} &= \sum_{m = k}^{n} \binom{m + 1}{k + 1} - \sum_{m = k}^{n} \binom{m}{k + 1} \\
+        &= \binom{n + 1}{k + 1} - \binom{k}{k + 1} \\
+        &= \binom{n + 1}{k + 1},
+    \end{align*}
+    as desired.
+
+    Alternatively, a combinatorial argument may be as follows. If we choose \(\para{k + 1}\) elements out of the set \(\brce{1, 2, \ldots, n + 1}\), if the final element we choose is \(m + 1\), then we have to choose \(k\) elements out of \(\brce{1, 2, \ldots, m}\). The final element we choose is at least \(k + 1\), therefore \(k \leq m \leq n\), and hence
+    \[
+        \binom{n + 1}{k + 1} = \sum_{m = k}^{n} \binom{m}{k}
+    \]
+    as desired.
+
+    Alternatively, we think of a generating function. Notice that
+    \begin{align*}
+        \para{1 + x}^{k} + \para{1 + x}^{k + 1} + \cdots + \para{1 + x}^{n} &= \frac{\para{1 + x}^{n + 1} - \para{1 + x}^{k}}{\para{1 + x} - 1} \\
+        &= \frac{\para{1 + x}^{n + 1} - \para{1 + x}^{k}}{x}.
+    \end{align*}
+
+    The coefficient of \(x^k\) on the left-hand side is
+    \[
+        \sum_{m = k}^{n} \binom{m}{k},
+    \]
+    and the coefficient of \(x^k\) on the right-hand side is the coefficient of \(x^{k + 1}\) on the numerator, which is
+    \[
+        \binom{n + 1}{k + 1}
+    \]
+    as desired.
+\end{solution}
+
+\subsection{Games}

@@ -1,0 +1,31 @@
+\documentclass{article}
+
+\makeatletter\def\input@path{{latex-style/}}\makeatother
+
+\usepackage{eason}
+\usepackage{pdfpages}
+\usepackage[a4paper, margin=1in]{geometry}
+
+\title{Interview Questions}
+\author{Eason Shao}
+\date{\today}
+
+% Cantor Set
+
+\usetikzlibrary{lindenmayersystems}
+\pgfdeclarelindenmayersystem{cantor set}{
+  \rule{F -> FfF}
+  \rule{f -> fff}
+}
+
+\begin{document}
+\maketitle
+\tableofcontents
+
+\include{1-graph-sketching}
+\include{2-analysis}
+\include{3-elementary-number-theory}
+\include{4-combinatorics}
+\include{5-algebra}
+
+\end{document}

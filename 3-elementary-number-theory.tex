@@ -1,0 +1,165 @@
+
+\section{Elementary Number Theory}
+\subsection{Primes and Divisibility}
+
+\begin{problem}
+    Define what is meant by a prime. Prove that there are infinitely primes. By considering \(4p_1 p_2 \cdots p_n + 3\), prove that there are infinitely primes of the form \(4n + 3\). Can we use the same proof for the primes of the form \(4n + 1\)?
+\end{problem}
+
+\begin{solution}
+    For contradiction, let \(p_1, p_2, \ldots, p_n\) be a list of finitely many primes. Consider \(n = p_1 p_2 \cdots p_n + 1\) does not have any prime factors, contradicting with the fundamental theorem of arithmetic.
+
+    A number of the form \(4n + 3\) must have a prime of the form \(4n + 3\) as its prime factor, and a similar argument follows.
+
+    This does not work precisely in this form since a number of the form \(4n + 1\) does not necessarily have a prime factor of the form \(4n + 1\).
+\end{solution}
+
+\begin{problem}
+    Is there a block of \(100\) integers, none of which are prime? What about precisely \(2\) of which are prime?
+\end{problem}
+
+\begin{solution}
+    Consider \(101! + 2\), \(101! + 3\), \dots, \(101! + 101\). Note they are all not prime.
+
+    Consider \(\brce{1, 2, \ldots, 100}\) has \(25\) primes.
+
+    If \(\brce{a + 1, \ldots, a + 100}\) has \(n_a\) primes, then \(\brce{\para{a + 1} + 1, \ldots, \para{a + 100} + 1}\) has \(n_a\) or \(n_a \pm 1\) primes.
+
+    This means from \(\brce{1, 2, \ldots, 100}\) having \(25\) primes to \(\brce{101! + 2, \ldots, 101! + 101}\) having \(0\) primes, it must have been through a block with only \(2\) primes.
+\end{solution}
+
+\begin{problem}
+    Find all positive integers \(n\) for which \(n\) does not divide \(\para{n - 1}!\).
+\end{problem}
+
+\begin{solution}
+    We can quickly convince ourselves that if \(n = ab\) for some \(a, b \in \NN\), \(1 < a, b < n\) and \(a \neq b\), then \(n\) divides \(\para{n - 1}!\).
+
+    What remains is \(n = p\) or \(n = p^2\) for \(p\) a prime. The first one does not work. For the second one, it is possible for \(p > 2\) since \(1 \leq p < 2p \leq p^2 - 1\).
+\end{solution}
+
+\begin{problem}
+    Let \(\totient\para{n}\) be the number of integers \(m\) where \(1 \leq m \leq n\) such that \(\gcd\para{m, n} = 1\). What is \(\totient\para{6}\)? What is \(\totient\para{p}\) where \(p\) is a prime? By considering the fractions
+    \[
+    \frac{1}{n}, \frac{2}{n}, \ldots, \frac{n}{n},
+    \]
+    prove that
+    \[
+        n = \sum_{d \divides n} \totient\para{d}. 
+    \]
+\end{problem}
+
+\begin{solution}
+    We have
+    \[
+        \totient\para{6} = \abs{\brce{1, 5}} = 2,
+    \]
+    and for primes \(p\),
+    \[
+        \totient\para{p} = p - 1.
+    \]
+
+    There are \(n\) fractions in this list, in this form.
+
+    On the other hand, if we simply the fractions to the simple form (where the numerator and the denominators are coprime), then the denominator is a factor of \(n\), say \(d \divides n\). There are \(\totient\para{d}\) of such fractions since the numerator is coprime. This gives the identity as desired.
+\end{solution}
+
+\subsection{Modular Arithmetic}
+
+\begin{problem}
+    What is the last digit of \(3^{2022}\)? What is the remainder of \(2022^{2022}\) when divided by \(7\)?
+\end{problem}
+
+\begin{solution}
+    Note the final digit of \(3^n\) is periodic:
+    \[
+        3, 9, 7, 1, 3, 9, 7, 1, \ldots
+    \]
+    and since \(2022 \equiv 2 \pmod{4}\), so the final digit is \(9\).
+
+    Alternatively, the period \(4\) can be seen from \(\gcd\para{3, 10} = 1\), and that \(\totient\para{10} = 4\), by Euler-Fermat.
+
+    Note that \(2022 \equiv -1 \pmod{7}\), so
+    \[
+        2022^{2022} \equiv \para{-1}^{2022} \equiv 1 \pmod{7}.
+    \]
+\end{solution}
+
+\begin{problem}
+    Are there any squares of the form \(4n + 2\)? What about \(4n + 3\)? Consider the equation \(a^2 + b^2 = c^2\) where \(a, b, c\) are positive integers. What can be said about the parity of \(a, b\) and \(c\)? What about Pythagorean quadruples or quintuples?
+\end{problem}
+
+\begin{solution}
+    No, since quadratic residues modulo \(3\) are \(0\) and \(1\).
+
+    \(\para{a, b, c} \equiv \para{0, 0, 0}, \para{0, 1, 1}, \para{1, 0, 1} \pmod{2}\) but not \(\para{1, 1, 0}\) by modulo \(4\).
+
+    For \(a, b, c, d\), it is possible to have \(a, b, c\) all even, one odd, but not two odds or three odds by modulo \(4\).
+
+    For \(a, b, c, d, e\), it is possible to have \(a, b, c\) all even, one odd, or all odds.
+\end{solution}
+
+\begin{problem}
+    Is \(123454321\) a multiple of \(9\)? What about \(12321\)? Show that a positive integer \(n\) is a multiple of \(9\) if and only if the sum of its digits is a multiple of \(0\). The number \(2^{29}\) is a nine-digit number with all digits distinct. Which digit is missing?
+\end{problem}
+
+\begin{solution}
+    No for \(123454321\), since \(1 + 2 + 3 + 4 + 5 + 4 + 3 + 2 + 1 = 25\) is not a multiple of \(9\).
+    
+    Yes for \(12321\), since \(1 + 2 + 3 + 2 + 1 = 9\) is a multiple of \(9\).
+
+    A number \(m = \overline{x_n x_{n - 1} \cdots x_1 x_0}\) satisfies
+    \begin{align*}
+        m &\equiv \sum_{k = 0}^{n} 10^{k} x_k \\
+        &\equiv \sum_{k = 0}^{n} 1^{k} x_k \\
+        &\equiv \sum_{k = 0}^{n} x_k \pmod{9}
+    \end{align*}
+    and this proves the statement.
+
+    We notice that
+    \begin{align*}
+        2^{29} &\equiv \para{2^3}^9 \cdot 2^2 \\
+        &\equiv \para{-1}^{9} \cdot 4 \\
+        &\equiv -4 \pmod{9} 
+    \end{align*}
+    and hence the digit missing is \(4\).
+\end{solution}
+
+\subsection{Number Base}
+
+\begin{problem}
+    What is \(100_{10}\) in base 3? What is \(10201_{11}\) in base 3? What is \(\para{\frac{1}{2}}_{10}\) in base 3? Describe the Cantor set in base 3.
+\end{problem}
+
+\begin{definition}[Cantor Set]
+    The Cantor set is defined as (the limit of) the following fractal, where each line segment is an open interval, and the first represents the closed interval \(\para{0, 1}\).
+
+    \begin{center}
+        \begin{tikzpicture}[scale=2]
+            \foreach \order in {0,...,8}
+                \draw[yshift=-\order*5pt]  l-system[l-system={cantor set, axiom=F, order=\order, step=100pt/(3^\order)}];
+        \end{tikzpicture}
+    \end{center}
+
+    Every time the middle \(\frac{1}{3}\) of a line segment is removed.
+\end{definition}
+
+\begin{solution}
+    \(100_{10} = \para{10_{10}}^2 = \para{101_{3}}^2 = 10201_{3}\).
+
+    Alternatively, \(100 = 81 + 2 \times 9 + 1 = 3^4 + 2 \times 3^2 + 1\) so \(100_{10} = 10201_{3}\).
+
+    \(121_{11} = \para{11_{11}}^2 = \para{12_{10}}^2 = \para{110_{3}}^2 = 12100_3\).
+
+    We notice that
+    \begin{align*}
+        \frac{1}{2} &= \frac{1}{3} \cdot \frac{1}{1 - \frac{1}{3}} \\
+        &= \frac{1}{3} + \frac{1}{3^2} + \frac{1}{3^3} + \cdots
+    \end{align*}
+    hence
+    \[
+        \para{\frac{1}{2}}_{10} = 0.111\ldots_{3}.
+    \]
+
+    The Cantor set contains precisely the numbers in \([0, 1]\) without any \(1\)1 in their ternary expansion. If we define the line segments to be closed intervals, then it contains precisely the numbers in \([0, 1]\) with finitely many \(1\)s in their ternary expansion.
+\end{solution}

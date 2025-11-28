@@ -1,0 +1,206 @@
+\section{Graph Sketching}
+\subsection{Explicit Functions}
+
+\begin{problem}
+    Sketch \(e^{\cosec x}\).
+\end{problem}
+
+\begin{solution}
+    It would be helpful to sketch the graph of \(\cosec x\), the inner function.
+
+    \begin{center}
+        \begin{tikzpicture}
+            \begin{axis} [
+                scale=1.8,
+                axis lines=center,
+                xlabel={\(x\)},
+                ylabel={\(\cosec x\)},
+                xtick={-2*pi, -1.5*pi, -pi, -0.5*pi, 0.5*pi, pi, 1.5*pi, 2*pi},
+                xticklabels={\(-2\pi\), \(-\frac{3}{2}\pi\), \(-\pi\), \(-\frac{1}{2}\pi\), \(\frac{1}{2}\pi\), \(\pi\), \(\frac{3}{2}\pi\), \(2\pi\)},
+                ytick distance=1]
+                \addplot [domain=-2*pi+0.2:-pi-0.2, smooth, trig format=rad] { cosec(x) };
+                \addplot [domain=-pi+0.2:-0.2, smooth, trig format=rad] { cosec(x) };
+                \addplot [domain=0.2:pi-0.2, smooth, trig format=rad] { cosec(x) };
+                \addplot [domain=pi+0.2:2*pi-0.2, smooth, trig format=rad] { cosec(x) };
+            \end{axis}
+        \end{tikzpicture}
+    \end{center}
+
+    Hence, the graph of \(e^{\cosec x}\) is as follows.
+
+    \begin{center}
+        \begin{tikzpicture}
+            \begin{axis} [
+                scale=1.8,
+                axis lines=center,
+                xlabel={\(x\)},
+                ylabel={\(e^{\cosec x}\)},
+                xtick={-2*pi, -1.5*pi, -pi, -0.5*pi, 0.5*pi, pi, 1.5*pi, 2*pi},
+                xticklabels={\(-2\pi\), \(-\frac{3}{2}\pi\), \(-\pi\), \(-\frac{1}{2}\pi\), \(\frac{1}{2}\pi\), \(\pi\), \(\frac{3}{2}\pi\), \(2\pi\)},
+                ytick={e, 1/e},
+                yticklabels={\(e\), \(\frac{1}{e}\)}, 
+                ytick distance=1]
+                \addplot [domain=-2*pi+0.5:-pi-0.5, smooth, trig format=rad] { exp(cosec(x)) };
+                \addplot [domain=-pi+0.1:-0.1, smooth, trig format=rad] { exp(cosec(x)) };
+                \addplot [domain=0.5:pi-0.5, smooth, trig format=rad] { exp(cosec(x)) };
+                \addplot [domain=pi+0.1:2*pi-0.1, smooth, trig format=rad] { exp(cosec(x)) };
+            \end{axis}
+        \end{tikzpicture}
+    \end{center}
+\end{solution}
+
+\begin{problem}
+    Sketch \(x \sin \para{\frac{1}{x}}\) and \(x \cos \para{\frac{1}{x}}\).
+    
+    Explain the behaviour as \(x \to 0\) and \(x \to \infinity\).
+\end{problem}
+
+\begin{solution}
+    The sketch of \(y = x \sin \para{\frac{1}{x}}\) is as follows. There are envelopes of \(y = \pm x\) and the coordinates of the intersections can be found.
+
+    \begin{center}
+        \begin{tikzpicture}
+            \begin{axis} [
+                scale=1.8,
+                axis lines=center,
+                xlabel={\(x\)},
+                ylabel={\(x \sin \para{\frac{1}{x}}\)},
+                ytick={1},
+                yticklabels={\(1\)}]
+                \addplot [domain=-pi:-0.001, smooth, trig format=rad, samples=500] { x * sin(1 / x) };
+                \addplot [domain=0.001:pi, smooth, trig format=rad, samples=500] { x * sin(1 / x) };
+                \addplot [domain=-0.5:1, smooth, dashed] { x };
+                \addplot [domain=-1:0.5, smooth, dashed] { -x };
+            \end{axis}
+        \end{tikzpicture}
+    \end{center}
+
+    As \(x \to 0\), \(\sin \para{\frac{1}{x}}\) is bounded (between \(-1\) and \(1\)), and hence \(x \sin \para{\frac{1}{x}} \to 0\).
+
+    As \(x \to \infinity\), \(\frac{1}{x} \to 0\), so \(\sin \para{\frac{1}{x}} \to \frac{1}{x}\), and hence \(x \sin \para{\frac{1}{x}} \to 1\).
+
+    The sketch of \(y = x \cos \para{\frac{1}{x}}\) is as follows. There are envelopes of \(y = \pm x\) and the coordinates of the intersections can be found.
+    \begin{center}
+        \begin{tikzpicture}
+            \begin{axis} [
+                scale=1.8,
+                axis lines=center,
+                xlabel={\(x\)},
+                ylabel={\(x \cos \para{\frac{1}{x}}\)}]
+                \addplot [domain=-pi:-0.001, smooth, trig format=rad, samples=500] { x * cos(1 / x) };
+                \addplot [domain=0.001:pi, smooth, trig format=rad, samples=500] { x * cos(1 / x) };
+                \addplot [domain=-pi:pi, smooth, dashed] { x };
+                \addplot [domain=-1:1, smooth, dashed] { -x };
+            \end{axis}
+        \end{tikzpicture}
+    \end{center}
+
+    As \(x \to 0\), by similar argument, \(x \cos \para{\frac{1}{x}} \to 0\).
+
+    As \(x \to \infinity\), \(\frac{1}{x} \to 0\), so \(\cos \para{\frac{1}{x}} \to 1\), and hence \(x \cos \para{\frac{1}{x}} \to x\).
+\end{solution}
+    
+\begin{problem}
+    For \(n \in \NN\),
+    \[
+        f_n\para{x} = \abs{\abs{1 - x^n} - \abs{1 + x^n}}
+    \]
+
+    Sketch \(f_1\para{x}\) and \(f_2\para{x}\). What is
+    \[
+        f\para{x} = \lim_{n \to \infinity} \abs{\abs{1 - x^n} - \abs{1 + x^n}} = \lim_{n \to \infinity} f_n\para{x}?
+    \]
+
+    Explain the behaviour near \(x = 1\).
+
+    Express \(f\) in terms of the Heaviside Step Function, \(H\para{x}\), where
+    \[
+        H\para{x} = \begin{cases}
+            1,& x > 0, \\
+            0,& x < 0.
+        \end{cases}
+    \]
+
+    Solve the differential equation
+    \[
+        \DiffFrac{y}{x} = f\para{x}
+    \]
+    satisfying \(y = 0\) when \(x = 0\).
+
+    Find \(f'\).
+\end{problem}
+
+\begin{solution}
+    When \(n = 1\),
+    \[
+        y_1 = \abs{\abs{1 - x} - \abs{1 + x}},
+    \]
+    and when \(n = 2\),
+    \[
+        y_2 = \abs{\abs{1 - x^2} - \abs{1 + x^2}},
+    \]
+
+    \begin{center}
+        \begin{tikzpicture}
+            \begin{axis} [
+                scale=1,
+                axis lines=center,
+                xlabel={\(x\)},
+                ylabel={\(y_1\)}]
+                \addplot [domain=-2:2, smooth, samples=500] { abs(abs(1 - x^1) - abs(1 + x^1)) };
+            \end{axis}
+        \end{tikzpicture}
+
+        \begin{tikzpicture}
+            \begin{axis} [
+                scale=1,
+                axis lines=center,
+                xlabel={\(x\)},
+                ylabel={\(y_1\)}]
+                \addplot [domain=-2:2, smooth, samples=500] { abs(abs(1 - x^2) - abs(1 + x^2)) };
+            \end{axis}
+        \end{tikzpicture}
+    \end{center}
+
+    We have
+    \[
+        f\para{x} = \lim_{n \to \infinity} f_n\para{x} = \begin{cases}
+        2, & x \leq -1 \text{ or } x \geq 1, \\
+        0, & -1 < x < 1.
+        \end{cases}
+    \]
+
+    Note here we cannot put the limit in for \(x^n\) which would diverge for \(\abs{x} > 1\). The behaviour of this limit is what is called a 'pointwise convergence' rather than a 'uniform convergence' for \(\abs{x} < 1\).
+
+    We have
+    \[
+        f\para{x} = 2 \brac{H\para{x - 1} + H\para{-x - 1}},
+    \]
+    and hence
+    \[
+        f'\para{x} = 2 \brac{\dd\para{x - 1} - \dd\para{-x - 1}},
+    \]
+    where \(\dd\) is the Dirac Delta Function.
+
+    The differential equation solves to
+    \[
+        F\para{x} = 2 \brac{R\para{x - 1} - R\para{-x - 1}} = \begin{cases}
+            2\para{x - 1}, & x \leq 1, \\
+            0, & -1 < x < 1, \\
+            -2\para{x + 1}, & x \leq -1,
+        \end{cases}
+    \]
+    where \(R\) is the ramp function,
+    \[
+        R\para{x} = \begin{cases}
+            x, & x \geq 0,\\
+            0, & x < 0.
+        \end{cases}
+    \]
+\end{solution}
+
+\subsection{Implicit Functions}
+
+\subsection{Polar Coordinates}
+
+\subsection{Graph Transformation}
